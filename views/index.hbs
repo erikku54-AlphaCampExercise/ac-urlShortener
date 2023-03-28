@@ -12,20 +12,15 @@
                 <button class="btn border-success fw-bold inner-button" type="reset">Reset</button>
             </div>
         {{else}}
-            <form action="">
-                <input class="form-control mb-4" type="url" name="originalURL" placeholder="Input URL here">
+            <form action="/" method="POST">
+                <input class="form-control mb-4" type="url" name="originalURL" placeholder="Input URL here" required>
                 <button class="btn border-success fw-bold inner-button" type="submit">Shorten</button>
                 <button class="btn border-success fw-bold inner-button" type="reset">Reset</button>
             </form>
         {{/if}}
     </div>
 
-
-
 </div>
-
-
-
 
 
 <style>
