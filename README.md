@@ -52,10 +52,10 @@ MONGODB_URI = "<你的連線字串>"
 
 * VS Code - 編程環境
 * node.js / express.js@4.18.2- 後端框架
-* express-handlebars@7.0.2 - 樣板引擎
-* bootstrap@5.2.3 - 樣式
-* fontawesome@5.8.1 (CDN) - icon
-* mongoose@7.0.2 - 連結MongoDB資料庫
+* express-handlebars@7.0.4 - 樣板引擎
+* mongoose@7.0.3 - 連結MongoDB資料庫
+* bootstrap@5.1.3 (CDN) - 樣式
+* fontawesome@6.4.0 (CDN) - icon
 * qrcode@1.5.1 (CDN) - 產生QR code
 
 底下為開發中使用

@@ -6,7 +6,7 @@
     <div class="inner-wrapper">
         {{#if shortCode}}
             <h5 class="fw-bold">Success! Please use this link</h5>
-            <a class="mb-3" id="shortenedUrl" href="/{{shortCode}}"></a>
+            <a class="mb-3" id="shortenedUrl" href="/{{shortCode}}" target="_blank"></a>
             <div>
                 <button class="btn border-success fw-bold inner-button" onclick="urlCopy(event)">Copy Url</button>
                 {{!-- <button class="btn border-success fw-bold inner-button" type="reset">Reset</button> --}}
@@ -50,11 +50,11 @@
             link.click();
         }
 
-        // 複製網址到剪貼簿(use Clipboard API)
+        // 一鍵複製網址功能(use Clipboard API)
         function urlCopy(e) {
             navigator.clipboard.writeText(shortenedUrl.textContent);
 
-            // 樣式變更
+            // 按鈕樣式變更
             const btn = e.target;
             btn.innerHTML = '<i class="fa-solid fa-circle-check"></i> Copied';
             btn.style="color: green;"
