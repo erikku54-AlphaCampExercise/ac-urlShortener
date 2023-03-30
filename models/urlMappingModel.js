@@ -1,15 +1,15 @@
 
 const mongoose = require('mongoose');
 const Schema = mongoose.Schema;
-const urlRelationSchema = new Schema({
+const urlMappingSchema = new Schema({
   originalURL: {
     type: String,
     required: true
   },
-  shortenedURL: {
+  shortCode: {
     type: String,
     required: true
   }
 })
 
-module.exports = mongoose.model('UrlRelation', urlRelationSchema);
+module.exports = mongoose.model('urlMapping', urlMappingSchema);
