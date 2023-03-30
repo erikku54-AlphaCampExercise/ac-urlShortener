@@ -37,7 +37,7 @@ router.post('/', (req, res) => {
 
       return generateCodeWhile(undefined).then(shortCode => urlMappingModel.create({ originalURL, shortCode }));
 
-      // (NG)系統可能存在重複code
+      // (底下NG)系統可能存在重複code
       // return urlMappingModel.create({ originalURL, shortCode: utility.generateCode(5) });
 
     }).then(urlMapping => res.render('index', { shortCode: urlMapping.shortCode }) // 產生畫面
@@ -46,14 +46,14 @@ router.post('/', (req, res) => {
 })
 
 // (功能)短網址重新導向
-router.get('/:id', (req, res) => {
-  // TODO: redirect
+router.get('/:code', (req, res) => {
 
-  
-  
+  // 如果此code存在資料庫，重新導向，否則回傳錯誤訊息
+  urlMappingModel.findOne({ shortCode: req.params.code })
+    .then(urlMapping =>
+      urlMapping !== null ? res.redirect(urlMapping.originalURL) : Promise.reject(new Error('No such address exists'))
+    ).catch(err => res.status(400).json({ error: err }));
 
-
-  res.render('index');
 });
 
 

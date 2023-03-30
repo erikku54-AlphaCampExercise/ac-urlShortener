@@ -6,7 +6,7 @@
     <div class="inner-wrapper">
         {{#if shortCode}}
             <h5 class="fw-bold">Success! Please use this link</h5>
-            <a class="mb-3" href="www.google.com">{{shortCode}}</a>
+            <a class="mb-3" id="shortenedUrl" href="/{{shortCode}}"></a>
             <div>
                 <button class="btn border-success fw-bold inner-button" type="submit">Shorten</button>
                 {{!-- <button class="btn border-success fw-bold inner-button" type="reset">Reset</button> --}}
@@ -23,6 +23,15 @@
 
 </div>
 
+<script>
+
+// 設定顯示短網址
+{{#if shortCode}}
+    const shortenedUrl = document.querySelector('#shortenedUrl');
+    shortenedUrl.textContent = location.protocol + '//' +location.host + '/' + '{{shortCode}}';
+{{/if}}
+
+</script>
 
 <style>
 
