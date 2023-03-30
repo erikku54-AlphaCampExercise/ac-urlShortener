@@ -40,7 +40,7 @@ router.post('/', (req, res) => {
 
 
       // 底下NG: 此寫法可能導致系統存在重複code
-      // return urlMappingModel.create({ originalURL, shortCode: utility.generateCode(5) }); 
+      // return urlMappingModel.create({ originalURL, shortCode: utility.generateCode(5) });
 
     }).then(urlMapping => res.render('index', { shortCode: urlMapping.shortCode }) // 產生畫面
     ).catch(err => res.status(500).json({ error: err }));
