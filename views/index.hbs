@@ -14,32 +14,45 @@
             </div>
         {{else}}
             <form action="/" method="POST">
-                <input class="form-control mb-4" type="url" name="originalURL" placeholder="Input URL here" required>
+                <input class="form-control mb-4" type="url" name="originalURL" placeholder="Input URL here" required>   {{!-- 標示為必要欄位，防止使用者送出空值 --}}
                 <button class="btn border-success fw-bold inner-button" type="submit">Shorten</button>
                 <button class="btn border-success fw-bold inner-button" type="reset">Reset</button>
             </form>
         {{/if}}
     </div>
 
+    {{!-- 追加QRcode顯示 --}}
+    {{#if shortCode}}
+        <canvas class="mt-3" id="canvas"></canvas>
+    {{/if}}
+
 </div>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/qrcode/1.5.1/qrcode.min.js" integrity="sha512-PEhlWBZBrQL7flpJPY8lXx8tIN7HWX912GzGhFTDqA3iWFrakVH3lVHomCoU9BhfKzgxfEk6EG2C3xej+9srOQ==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
 
 <script>
 
-// 設定顯示短網址
-{{#if shortCode}}
-    const shortenedUrl = document.querySelector('#shortenedUrl');
-    shortenedUrl.textContent = location.protocol + '//' +location.host + '/' + '{{shortCode}}';
+    {{#if shortCode}}
 
-    // 複製網址到剪貼簿(use Clipboard API)
-    function urlCopy(e) {
-        navigator.clipboard.writeText(shortenedUrl.textContent);
+        // 設定顯示短網址
+        const shortenedUrl = document.querySelector('#shortenedUrl');
+        shortenedUrl.textContent = location.protocol + '//' +location.host + '/' + '{{shortCode}}';
 
-        // 樣式轉換
-        const btn = e.target;
-        btn.innerHTML = '<i class="fa-solid fa-circle-check"></i> Copied';
-        btn.style="color: green;"
-    }
-{{/if}}
+        // 繪製QRcode
+        let canvas = document.querySelector('#canvas');
+        QRCode.toCanvas(canvas, shortenedUrl.textContent, err => { if(err) console.error(error); });
+
+        // 複製網址到剪貼簿(use Clipboard API)
+        function urlCopy(e) {
+            navigator.clipboard.writeText(shortenedUrl.textContent);
+
+            // 樣式變更
+            const btn = e.target;
+            btn.innerHTML = '<i class="fa-solid fa-circle-check"></i> Copied';
+            btn.style="color: green;"
+        }
+
+    {{/if}}
 
 </script>
 
