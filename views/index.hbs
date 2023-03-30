@@ -8,7 +8,7 @@
             <h5 class="fw-bold">Success! Please use this link</h5>
             <a class="mb-3" id="shortenedUrl" href="/{{shortCode}}"></a>
             <div>
-                <button class="btn border-success fw-bold inner-button" type="submit">Shorten</button>
+                <button class="btn border-success fw-bold inner-button" onclick="urlCopy(event)">Copy Url</button>
                 {{!-- <button class="btn border-success fw-bold inner-button" type="reset">Reset</button> --}}
                 <a class="btn border-success fw-bold inner-button" href="">Try New</a>
             </div>
@@ -29,6 +29,16 @@
 {{#if shortCode}}
     const shortenedUrl = document.querySelector('#shortenedUrl');
     shortenedUrl.textContent = location.protocol + '//' +location.host + '/' + '{{shortCode}}';
+
+    // 複製網址到剪貼簿(use Clipboard API)
+    function urlCopy(e) {
+        navigator.clipboard.writeText(shortenedUrl.textContent);
+
+        // 樣式轉換
+        const btn = e.target;
+        btn.innerHTML = '<i class="fa-solid fa-circle-check"></i> Copied';
+        btn.style="color: green;"
+    }
 {{/if}}
 
 </script>
@@ -52,6 +62,6 @@
 
     .inner-button {
         height: 40px;
-        width: 100px;
+        width: 110px;
     }
 </style>
