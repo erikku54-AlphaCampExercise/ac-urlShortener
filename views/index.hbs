@@ -10,7 +10,7 @@
             <div>
                 <button class="btn border-success fw-bold inner-button" onclick="urlCopy(event)">Copy Url</button>
                 {{!-- <button class="btn border-success fw-bold inner-button" type="reset">Reset</button> --}}
-                <a class="btn border-success fw-bold inner-button" href="">Try New</a>
+                <a class="btn border-success fw-bold inner-button" href="/">Try New</a>
             </div>
         {{else}}
             <form action="/" method="POST">
@@ -23,7 +23,8 @@
 
     {{!-- 追加QRcode顯示 --}}
     {{#if shortCode}}
-        <canvas class="mt-3" id="canvas"></canvas>
+        <div><canvas class="mt-3" id="canvas"></canvas></div>
+        <button class="btn border-success fw-bold inner-button" onclick="qrcodeDownload()">Download</button>
     {{/if}}
 
 </div>
@@ -38,9 +39,16 @@
         const shortenedUrl = document.querySelector('#shortenedUrl');
         shortenedUrl.textContent = location.protocol + '//' +location.host + '/' + '{{shortCode}}';
 
-        // 繪製QRcode
+        // 繪製QRcode及下載功能
         let canvas = document.querySelector('#canvas');
         QRCode.toCanvas(canvas, shortenedUrl.textContent, err => { if(err) console.error(error); });
+
+        function qrcodeDownload() {
+            let link = document.createElement('a');
+            link.download = 'qrcode.png';
+            link.href = canvas.toDataURL();
+            link.click();
+        }
 
         // 複製網址到剪貼簿(use Clipboard API)
         function urlCopy(e) {
