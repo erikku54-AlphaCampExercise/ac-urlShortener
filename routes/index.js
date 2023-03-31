@@ -43,7 +43,7 @@ router.post('/', (req, res) => {
       // return urlMappingModel.create({ originalURL, shortCode: utility.generateCode(5) });
 
     }).then(urlMapping => res.render('index', { shortCode: urlMapping.shortCode }) // 產生畫面
-    ).catch(err => res.status(500).json({ error: err }));
+    ).catch(err => res.status(500).json({ error: err.message }));
 
 })
 
