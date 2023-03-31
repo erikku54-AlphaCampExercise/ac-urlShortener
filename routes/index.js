@@ -17,16 +17,15 @@ router.post('/', (req, res) => {
   urlMappingModel.findOne({ originalURL })
     .then(urlMapping => {
 
-      // 若本來已存在mapping資料，把結果回傳給下一個then來產生畫面
+      // 若本來已存在mapping資料，直接回傳給下一個then來產生畫面
       if (urlMapping !== null) {
         return urlMapping;
       }
 
       // 若本來不存在mapping資料，取亂數並建立新物件後回傳
+      // 底下是一個promise loop，會持續執行直到5位數亂碼並不存在於db中
 
       let code;
-
-      // 底下是一個promise loop，會持續執行直到5位數亂碼並不存在於db中
       const generateCodeWhile = (mapping) => {
         if (mapping !== null) {
           code = utility.generateCode(5);

@@ -1,8 +1,8 @@
 {
   "name": "33_ac-urlshortener",
   "version": "1.0.0",
-  "description": "",
-  "main": "index.js",
+  "description": "Url Shortener: 短網址產生器",
+  "main": "app.js",
   "scripts": {
     "start": "node app.js",
     "dev": "nodemon app.js",
